@@ -50,6 +50,7 @@ namespace itk
   * interpolation of multidimensional objects. 1990
   */
 
+<<<<<<< HEAD
 class ITK_EXPORT IntraBinaryShapeBasedInterpolationImageFilter :
     public itk::ImageToImageFilter < itk::Image< unsigned char, 3 >, itk::Image< unsigned char, 3 > >
 {
@@ -57,6 +58,15 @@ public:
   typedef unsigned char InputPixelType;
   typedef double        IntermediatePixelType;
 
+=======
+class ITK_EXPORT IntraBinaryShapeBasedInterpolationImageFilter : 
+    public itk::ImageToImageFilter < itk::Image< unsigned char, 3 >, itk::Image< unsigned char, 3 > >
+{   
+public:           
+  typedef unsigned char InputPixelType;
+  typedef double        IntermediatePixelType;
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   typedef itk::Image< InputPixelType, 3 >        InputImageType;
   typedef itk::Image< InputPixelType, 3 >        IntermediateImageType;
   typedef itk::Image< IntermediatePixelType, 3 > IntermediateImageType2;
@@ -71,12 +81,20 @@ public:
   typedef itk::ImageToImageFilter<InputImageType, OutputImageType>  Superclass;
   typedef itk::SmartPointer<Self>                                   Pointer;
   typedef itk::SmartPointer<const Self>                             ConstPointer;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   /** Method for creation through the object factory. */
   itkNewMacro(Self);
 
   /** Run-time type information (and related methods). */
+<<<<<<< HEAD
   itkTypeMacro( IntraBinaryShapeBasedInterpolationImageFilter, ImageToImageFilter );
+=======
+  itkTypeMacro( IntraBinaryShapeBasedInterpolationImageFilter, ImageToImageFilter );    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
 
   /** Typedefs to access images. */
   typedef itk::ImageSliceConstIteratorWithIndex< InputImageType >   ConstSliceItType;
@@ -85,6 +103,7 @@ public:
   typedef itk::ImageRegionIterator< IntermediateImageType2 >        IntermediateRegionItType;
   typedef itk::ImageRegionIterator< OutputImageType >               OutputRegionItType;
 
+<<<<<<< HEAD
   typedef InputImageType::Pointer                          InputImagePointer;
   typedef InputImageType::ConstPointer                     InputImageConstPointer;
   typedef InputImageType::RegionType                       InputRegionType;
@@ -100,51 +119,102 @@ public:
   typedef IntermediateImageType::IndexType                 IntermediateIndexType;
   typedef IntermediateImageType::PointType                 IntermediatePointType;
 
+=======
+  typedef InputImageType::Pointer                          InputImagePointer; 
+  typedef InputImageType::ConstPointer                     InputImageConstPointer; 
+  typedef InputImageType::RegionType                       InputRegionType; 
+  typedef InputImageType::SizeType                         InputSizeType;
+  typedef InputImageType::SpacingType                      InputSpacingType; 
+  typedef InputImageType::IndexType                        InputIndexType;
+  typedef InputImageType::PointType                        InputPointType;
+    
+  typedef IntermediateImageType::Pointer                   IntermediateImagePointer;
+  typedef IntermediateImageType::RegionType                IntermediateRegionType;
+  typedef IntermediateImageType::SizeType                  IntermediateSizeType; 
+  typedef IntermediateImageType::SpacingType               IntermediateSpacingType; 
+  typedef IntermediateImageType::IndexType                 IntermediateIndexType;
+  typedef IntermediateImageType::PointType                 IntermediatePointType;
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   typedef OutputImageType::Pointer                         OutputImagePointer;
   typedef OutputImageType::RegionType                      OutputRegionType;
   typedef OutputImageType::SizeType                        OutputSizeType;
   typedef OutputImageType::SpacingType                     OutputSpacingType;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   /** Set/Get the delineation ratio defined as the ratio of the
     * delineated slices in the output image (i.e. after interpolation) to
     * the number of the delineated slices in the input image (i.e. before
     * interpolation)*/
   itkSetMacro( DelineationRatio, unsigned int );
+<<<<<<< HEAD
   itkGetConstReferenceMacro( DelineationRatio, unsigned int );
 
   itkStaticConstMacro( ImageDimension, unsigned int, 3 );
 
   typedef itk::InterpolateImageFunction< IntermediateImageType2, double>     InterpolatorType;
 
+=======
+  itkGetConstReferenceMacro( DelineationRatio, unsigned int ); 
+    
+  itkStaticConstMacro( ImageDimension, unsigned int, 3 );
+    
+  typedef itk::InterpolateImageFunction< IntermediateImageType2, double>     InterpolatorType;
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   /** Set the interpolator function.  The default is
     * itk::LinearInterpolateImageFunction. Some
     * other options are itk::NearestNeighborInterpolateImageFunction
     * and itk::BSplineInterpolateImageFunction
     * (which provides a higher order of interpolation).  */
   itkSetObjectMacro( Interpolator, InterpolatorType );
+<<<<<<< HEAD
 
   /** Get a pointer to the interpolator function. */
   itkGetConstObjectMacro( Interpolator, InterpolatorType );
 
+=======
+    
+  /** Get a pointer to the interpolator function. */
+  itkGetConstObjectMacro( Interpolator, InterpolatorType );
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
 protected:
   /** Default constructor and destructor. */
   IntraBinaryShapeBasedInterpolationImageFilter();
   ~IntraBinaryShapeBasedInterpolationImageFilter();
+<<<<<<< HEAD
 
   // Override since the output image has a different size as that of the input
   void GenerateOutputInformation();
 
+=======
+        
+  // Override since the output image has a different size as that of the input
+  void GenerateOutputInformation();
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   // Override since the filter requests a larger requested region on the input
   void GenerateInputRequestedRegion();
 
   void GenerateData();
+<<<<<<< HEAD
 
   // Find all slices that are delineated (i.e. wherein there exist
   // non-zero pixel intensities).
+=======
+    
+  // Find all slices that are delineated (i.e. wherein there exist
+  // non-zero pixel intensities). 
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   // They must be joint/contiguous in the input image.
   // The distance map calculation will be performed on these slices
   // only to gain time of calculation.
   void FindZCoordinatesOfDelineatedSlices();
+<<<<<<< HEAD
 
   // Generate the information (origin, spacing, size,
   // LagestPossibleRegion,...) of the image made of the delineated
@@ -159,6 +229,22 @@ protected:
   typedef itk::ResampleImageFilter< IntermediateImageType2, IntermediateImageType2 >                  ResampleFilterType;
   typedef itk::IdentityTransform< double, 3 >                                                         TransformType;
 
+=======
+    
+  // Generate the information (origin, spacing, size,
+  // LagestPossibleRegion,...) of the image made of the delineated
+  // slices only 
+  void GenerateIntermediateImageInformation();
+    
+  /** Display. */
+  void PrintSelf(std::ostream& os, Indent indent) const;
+    
+  typedef itk::SliceBySliceImageFilter< InputImageType, IntermediateImageType2 >                      SliceBySliceFilterType;
+  typedef itk::SignedDanielssonDistanceMapImageFilter< InternalInImageType, InternalOutImageType >    DistanceMapImageFilterType;   
+  typedef itk::ResampleImageFilter< IntermediateImageType2, IntermediateImageType2 >                  ResampleFilterType;
+  typedef itk::IdentityTransform< double, 3 >                                                         TransformType;
+    
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   SliceBySliceFilterType::Pointer                                                            m_SliceBySliceFilter;
   DistanceMapImageFilterType::Pointer                                                        m_DistanceMapImageFilter;
   ResampleFilterType::Pointer                                                                m_ResampleFilter;
@@ -170,9 +256,15 @@ private:
   // without the factory methods
   IntraBinaryShapeBasedInterpolationImageFilter( const Self& );  // intentionally not implemented
   void operator=( const Self& );                                 // intentionally not implemented
+<<<<<<< HEAD
 
   unsigned int                            m_DelineationRatio;    // defined as the ratio of the delineated slices in the output
   // image (i.e. after interpolation) to the number of the
+=======
+    
+  unsigned int                            m_DelineationRatio;    // defined as the ratio of the delineated slices in the output 
+  // image (i.e. after interpolation) to the number of the 
+>>>>>>> 025fb07a2ab858dbb48382129b3c444172f3f779
   // delineated slices in the input image (i.e. before interpolation)
   std::vector< int >                      m_DelineationZCoordinateArray;
   IntermediateImagePointer                m_IntermediateImage;
