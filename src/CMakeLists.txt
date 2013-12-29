@@ -1,0 +1,5 @@
+
+ADD_LIBRARY( BinaryShapeBasedInterpolationImageFilters itkInterBinaryShapeBasedInterpolationImageFilter.cxx itkIntraBinaryShapeBasedInterpolationImageFilter.cxx )
+
+
+
