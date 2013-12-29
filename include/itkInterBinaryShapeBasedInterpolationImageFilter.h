@@ -80,21 +80,21 @@ namespace itk
     typedef itk::ImageRegionIterator< IntermediateImageType2 >        IntermediateRegionItType;
     typedef itk::ImageRegionIterator< OutputImageType >               OutputRegionItType;
 
-    typedef typename InputImageType::ConstPointer                     InputImageConstPointer; 
-    typedef typename InputImageType::RegionType                       InputRegionType; 
-    typedef typename InputImageType::SizeType                         InputSizeType; 
-    typedef typename InputImageType::SpacingType                      InputSpacingType; 
-    typedef typename InputImageType::IndexType                        InputIndexType;
-    typedef typename InputImageType::PointType                        InputPointType;
+    typedef InputImageType::ConstPointer                     InputImageConstPointer; 
+    typedef InputImageType::RegionType                       InputRegionType; 
+    typedef InputImageType::SizeType                         InputSizeType; 
+    typedef InputImageType::SpacingType                      InputSpacingType; 
+    typedef InputImageType::IndexType                        InputIndexType;
+    typedef InputImageType::PointType                        InputPointType;
 
-    typedef typename IntermediateImageType::Pointer                   IntermediateImagePointer;
-    typedef typename IntermediateImageType::RegionType                IntermediateRegionType;
-    typedef typename IntermediateImageType::SizeType                  IntermediateSizeType; 
-    typedef typename IntermediateImageType::IndexType                 IntermediateIndexType;
-    typedef typename IntermediateImageType::PointType                 IntermediatePointType;
+    typedef IntermediateImageType::Pointer                   IntermediateImagePointer;
+    typedef IntermediateImageType::RegionType                IntermediateRegionType;
+    typedef IntermediateImageType::SizeType                  IntermediateSizeType; 
+    typedef IntermediateImageType::IndexType                 IntermediateIndexType;
+    typedef IntermediateImageType::PointType                 IntermediatePointType;
    
-    typedef typename OutputImageType::Pointer                         OutputImagePointer;
-    typedef typename OutputImageType::RegionType                      OutputRegionType;
+    typedef OutputImageType::Pointer                         OutputImagePointer;
+    typedef OutputImageType::RegionType                      OutputRegionType;
     
     /** Set/Get the delineation ratio defined as the ratio of the delineated slices in the 
      * output image (i.e. after interpolation) to the number of the delineated slices in 
@@ -140,10 +140,10 @@ namespace itk
     typedef itk::ResampleImageFilter< IntermediateImageType2, IntermediateImageType2 >                ResampleFilterType;
     typedef itk::IdentityTransform< double, 3 >                                                       TransformType;    
     
-    typename SliceBySliceFilterType::Pointer                                                          m_SliceBySliceFilter;
-    typename DistanceMapImageFilterType::Pointer                                                      m_DistanceMapImageFilter;
-    typename ResampleFilterType::Pointer                                                              m_ResampleFilter;
-    typename TransformType::Pointer                                                                   m_Transform;
+    SliceBySliceFilterType::Pointer                                                          m_SliceBySliceFilter;
+    DistanceMapImageFilterType::Pointer                                                      m_DistanceMapImageFilter;
+    ResampleFilterType::Pointer                                                              m_ResampleFilter;
+    TransformType::Pointer                                                                   m_Transform;
     
 
   private:
@@ -157,7 +157,7 @@ namespace itk
                                                                    // delineated slices in the input image (i.e. before interpolation)
     std::vector< int >                      m_DelineationZCoordinateArray;
     IntermediateImagePointer                m_IntermediateImage;
-    typename InterpolatorType::Pointer      m_Interpolator;
+    InterpolatorType::Pointer      m_Interpolator;
   };
 } // end namespace itk
 #endif  // #define __INTERBINARYSHAPEBASEDINTERPOLATIONIMAGEFILTER_H
