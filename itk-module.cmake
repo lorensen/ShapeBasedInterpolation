@@ -1,6 +1,6 @@
 set(DOCUMENTATION "This module contains a classes to perform shape based interpolation of binary images." )
 
-itk_module( ShapeBasedInterpolation
+itk_module(ShapeBasedInterpolation
   DEPENDS
     ITKCommon
     ITKDistanceMap

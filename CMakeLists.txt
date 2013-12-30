@@ -1,3 +1,4 @@
 project(ShapeBasedInterpolation)
+set(ShapeBasedInterpolation_LIBRARIES ShapeBasedInterpolation)
 itk_module_impl()
 

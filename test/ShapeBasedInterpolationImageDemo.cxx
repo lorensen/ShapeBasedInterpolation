@@ -1,4 +1,4 @@
-/*===============================================================================================================
+/*======================================================================================================
   Program:    Insight Segmentation & Registration Toolkit
   Language:   C++
   Date:       june 2012
@@ -14,7 +14,7 @@
   This software is distributed WITHOUT ANY WARRANTY; without even the implied 
   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
   See the copyright notices for more information.
-================================================================================================================*/
+========================================================================================================*/
 
 #include "itkInterBinaryShapeBasedInterpolationImageFilter.h"
 #include "itkIntraBinaryShapeBasedInterpolationImageFilter.h"
@@ -26,8 +26,7 @@
 #include <itkBSplineInterpolateImageFunction.h>
 #include <itkNearestNeighborInterpolateImageFunction.h>
 
-
-int main( int argc, char* argv[] )
+int ShapeBasedInterpolationImageDemo( int argc, char* argv[] )
 {
   if( argc < 3 ) 
     { 
@@ -39,11 +38,8 @@ int main( int argc, char* argv[] )
   char* inputFile = argv[1];
   char* outputFile = argv[2];
   std::string interp; 
-  bool answer = true;
+  bool answer = false;
   
-  std::cout << "Are the delineated slices disjoint in your original image? Usage : 1 for true, 0 for false." << std::endl;
-  std::cin >> answer;
-
   typedef unsigned char InputPixelType;
   const unsigned int Dimension = 3;
   
@@ -63,55 +59,73 @@ int main( int argc, char* argv[] )
 
   InterpolatorType::Pointer interpolator;  
   if( argv[3]!='\0' )
-  {
+    {
     interp = argv[3];
-    if( interp == "nn" ) interpolator             =  NNInterpolatorType::New();
-      else if( interp == "linear" ) interpolator  =  LinearInterpolatorType::New();
-      else if( interp == "bspline" ) interpolator =  BSplineInterpolatorType::New();
-      else std::cerr << "Error. I do not know interpolation. Choose among: nn, linear, bspline. By default : linear." << std::endl;
-  }
+    if( interp == "nn" )
+      {
+      interpolator             =  NNInterpolatorType::New();
+      }
+    else if( interp == "linear" )
+      {
+      interpolator  =  LinearInterpolatorType::New();
+      }
+    else if( interp == "bspline" )
+      {
+      interpolator =  BSplineInterpolatorType::New();
+      }
+    else
+      {
+      std::cerr << "Error. I do not know interpolation. Choose among: nn, linear, bspline. By default : linear." << std::endl;
+      }
+    }
   
   WriterType::Pointer writer = WriterType::New();
   writer->SetFileName( outputFile );
 
   if( answer )
-  {
+    {
     typedef itk::InterBinaryShapeBasedInterpolationImageFilter      FilterType;
     FilterType::Pointer filter = FilterType::New();
     filter->SetInput( reader->GetOutput() );
     filter->SetDelineationRatio( 3 );
-    if( !(interp.empty()) ) filter->SetInterpolator( interpolator );
+    if( !(interp.empty()) )
+      {
+      filter->SetInterpolator( interpolator );
+      }
     writer->SetInput( filter->GetOutput() );
     try
-    {
+      {
       writer->Update();
       std::cout << "Writing the image..." << std::endl;
-    }
+      }
     catch( itk::ExceptionObject & excep )
-    {
+      {
       std::cerr << "Exception caught !" << std::endl;
       std::cerr << excep << std::endl;
+      }
     }
-  }
   else
-  {
+    {
     typedef itk::IntraBinaryShapeBasedInterpolationImageFilter      FilterType;
     FilterType::Pointer filter = FilterType::New();
     filter->SetInput( reader->GetOutput() );
     filter->SetDelineationRatio( 3 );
-    if( !(interp.empty()) ) filter->SetInterpolator( interpolator );
+    if( !(interp.empty()) )
+      {
+      filter->SetInterpolator( interpolator );
+      }
     writer->SetInput( filter->GetOutput() );
     try
-    {
+      {
       writer->Update();
       std::cout << "Writing the image..." << std::endl;
-    }
+      }
     catch( itk::ExceptionObject & excep )
-    {
+      {
       std::cerr << "Exception caught !" << std::endl;
       std::cerr << excep << std::endl;
+      }
     }
-  }
   
-  return 0;  
+  return EXIT_SUCCESS;  
 }  // end main
