@@ -1,3 +1,3 @@
-project(ImageBasedInterpolation)
+project(ShapeBasedInterpolation)
 itk_module_impl()
 
